@@ -2,7 +2,12 @@ package org.ucll.web4.chat_user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.ucll.web4.exceptions.ArgumentEmptyException;
+import org.ucll.web4.exceptions.ArgumentNullException;
 import org.ucll.web4.exceptions.ChatUserAlreadyExistsException;
+
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ChatUserService {
@@ -13,13 +18,26 @@ public class ChatUserService {
         this.repository = repository;
     }
 
-    public void registerChatUser(ChatUser chatUser){
-        if(chatUser == null) throw new IllegalArgumentException();
+    //registers a new chat user
+    public void register(ChatUser chatUser){
+        if(chatUser == null) throw new ArgumentNullException();
 
-        //check if user already exists
-        if(repository.existsById(chatUser.getId())) throw new ChatUserAlreadyExistsException();
+        if(repository.existsById(chatUser.getUserId())) throw new ChatUserAlreadyExistsException();
 
-        //persist chat user
         repository.saveAndFlush(chatUser);
+    }
+
+    //update the status of the chat user with the provided id
+    public void updateStatus(UUID chatUserId, String newStatus){
+        if(chatUserId == null || newStatus == null) throw new ArgumentNullException();
+
+        if(newStatus.isEmpty()) throw new ArgumentEmptyException();
+
+        repository.updateStatus(chatUserId,newStatus);
+    }
+
+    //postman test
+    public List<ChatUser> getAll(){
+        return repository.findAll();
     }
 }
