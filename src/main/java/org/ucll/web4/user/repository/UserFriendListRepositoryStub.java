@@ -1,11 +1,13 @@
 package org.ucll.web4.user.repository;
 
+import org.springframework.stereotype.Repository;
 import org.ucll.web4.user.UserEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@Repository
 public class UserFriendListRepositoryStub implements UserFriendListRepository {
 
     private final HashMap<UserEntity,List<UserEntity>> friendMap;
