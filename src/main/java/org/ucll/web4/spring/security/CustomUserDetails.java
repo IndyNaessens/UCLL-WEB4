@@ -21,6 +21,14 @@ public class CustomUserDetails implements UserDetails {
         return userEntity.getUserId();
     }
 
+    public String getFullName(){
+        return userEntity.getFirstName() + " " + userEntity.getLastName();
+    }
+
+    public String getStatus(){
+        return userEntity.getStatus();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return grantedAuthorities;

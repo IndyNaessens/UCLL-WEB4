@@ -1,35 +1,33 @@
 package org.ucll.web4.repository.friendlist;
 
 import org.springframework.stereotype.Repository;
-import org.ucll.web4.entity.UserEntity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class UserFriendListRepositoryStub implements UserFriendListRepository {
 
-    private final HashMap<UserEntity, List<UserEntity>> friendMap;
+    private final HashMap<UUID, Set<UUID>> friendMap;
 
     public UserFriendListRepositoryStub() {
         friendMap = new HashMap<>();
     }
 
     @Override
-    public void addFriend(UserEntity owner, UserEntity newFriend) {
-        if (!friendMap.containsKey(owner)) {
-            friendMap.put(owner, new ArrayList<>());
+    public void addFriend(UUID userId, UUID friendId) {
+        if (!friendMap.containsKey(userId)) {
+            friendMap.put(userId, new HashSet<>());
         }
 
-        friendMap.get(owner).add(newFriend);
+        friendMap.get(userId).add(friendId);
     }
 
     @Override
-    public List<UserEntity> getFriends(UserEntity owner) {
-        List<UserEntity> friends = friendMap.get(owner);
+    public List<UUID> getFriends(UUID userId) {
+        if (!friendMap.containsKey(userId)) {
+            friendMap.put(userId, new HashSet<>());
+        }
 
-        if (friends == null) return new ArrayList<>(); //there is no entry for owner, he has not added any friends yet
-        return friends;
+        return new ArrayList<>(friendMap.get(userId));
     }
 }

@@ -33,8 +33,8 @@ public class AuthController {
         return new RedirectView("/login?error");
     }
 
-    @PostMapping("/logout-success")
-    public RedirectView logoutSuccess() {
+    @GetMapping("/logout-success")
+    public RedirectView logoutSuccessGet() {
         return new RedirectView("/login?logout");
     }
 }

@@ -2,8 +2,8 @@ package org.ucll.web4.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.ucll.web4.dto.FriendDto;
 import org.ucll.web4.entity.UserEntity;
-import org.ucll.web4.exception.AlreadyBefriendedException;
 import org.ucll.web4.exception.ArgumentEmptyException;
 import org.ucll.web4.exception.ArgumentNullException;
 import org.ucll.web4.exception.UserDoesNotExistException;
@@ -12,6 +12,7 @@ import org.ucll.web4.repository.user.UserRepository;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -37,31 +38,27 @@ public class UserService {
     }
 
     //add a user to the friend list of a user
-    public void addFriend(UUID userId, UUID newFriendId) {
+    public void addFriend(UUID userId, UUID userIdFriend) {
         //checks
-        if (userId == null || newFriendId == null) throw new ArgumentNullException();
-        if (!(userRepository.exists(userId) && userRepository.exists(newFriendId)))
-            throw new UserDoesNotExistException();
-
-        UserEntity owner = userRepository.get(userId);
-        UserEntity newFriend = userRepository.get(newFriendId);
-
-        List<UserEntity> ownerFriends = friendListRepository.getFriends(owner);
-        if (ownerFriends.contains(newFriend)) throw new AlreadyBefriendedException();
+        if (userId == null || userIdFriend == null) throw new ArgumentNullException();
+        if (!(userRepository.exists(userId) && userRepository.exists(userIdFriend))) throw new UserDoesNotExistException();
 
         //add friend
-        friendListRepository.addFriend(owner, newFriend);
+        friendListRepository.addFriend(userId, userIdFriend);
     }
 
     //get an overview of the friends of a user
-    public List<UserEntity> getFriendList(UUID userId) {
+    public List<FriendDto> getFriendList(UUID userId) {
         //checks
         if (userId == null) throw new ArgumentNullException();
         if (!userRepository.exists(userId)) throw new UserDoesNotExistException();
 
         //get friends
-        UserEntity owner = userRepository.get(userId);
-        return friendListRepository.getFriends(owner);
+        return friendListRepository.getFriends(userId)
+                .stream()
+                .map(userRepository::get)   //costly
+                .map(FriendDto::new)
+                .collect(Collectors.toList());
     }
 
     public UUID getUserIdFromEmail(String email) {

@@ -1,17 +1,17 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/head::standard( ~{::title} ) ">
+<head th:replace="fragments/head::standard( ~{::title})">
     <title>ChatApp - Login</title>
 </head>
 
-<body th:replace="fragments/body::standard( ~{fragments/header::standard}, ~{::main}, ~{fragments/footer::standard} )">
+<body th:replace="fragments/body::standard( ~{fragments/header::standard}, ~{::main}, ~{fragments/footer::standard}, ~{} )">
 
     <main>
         <div class="mx-auto">
-            <p th:if="${loginError}" class="error">Wrong username or password</p>
-            <p th:if="${logoutSuccess}">You've been logged out successfully</p>
-            <form th:action="@{/login}" method="post">
+            <p th:if="${loginError}" class="text-danger">Wrong username or password</p>
+            <p th:if="${logoutSuccess}" class="text-success">You've been logged out successfully</p>
+            <form th:action="@{/login}" th:method="post">
                 <label for="username">Username</label>:
                 <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
                 <label for="password">Password</label>:

@@ -1,12 +1,11 @@
 package org.ucll.web4.repository.friendlist;
 
-import org.ucll.web4.entity.UserEntity;
-
 import java.util.List;
+import java.util.UUID;
 
 public interface UserFriendListRepository {
 
-    void addFriend(UserEntity owner, UserEntity newFriend);
+    void addFriend(UUID userId, UUID friendId);
 
-    List<UserEntity> getFriends(UserEntity owner);
+    List<UUID> getFriends(UUID userId);
 }

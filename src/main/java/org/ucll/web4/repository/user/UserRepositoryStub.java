@@ -18,18 +18,18 @@ public class UserRepositoryStub implements UserRepository {
     }
 
     @Override
-    public void create(UserEntity entity, UUID key) {
-        users.put(key, entity);
+    public void create(UserEntity user, UUID userId) {
+        users.put(userId, user);
     }
 
     @Override
-    public UserEntity get(UUID key) {
-        return users.get(key);
+    public UserEntity get(UUID userId) {
+        return users.get(userId);
     }
 
     @Override
-    public void update(UserEntity entity) {
-        users.replace(entity.getUserId(), entity);
+    public void update(UserEntity user) {
+        users.replace(user.getUserId(), user);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class UserRepositoryStub implements UserRepository {
     }
 
     @Override
-    public boolean exists(UUID key) {
-        return users.containsKey(key);
+    public boolean exists(UUID userId) {
+        return users.containsKey(userId);
     }
 }

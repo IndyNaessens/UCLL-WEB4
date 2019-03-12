@@ -13,10 +13,6 @@ public class UserEntity {
     private final String password;
     private String status;
 
-    private UserEntity() {
-        this(UUID.randomUUID(), "defaultf", "defaultl", "default@default.default", "000", "Tester");
-    }
-
     //constructors
     private UserEntity(UUID id, String firstName, String lastName, String email, String password, String status) {
         this.userId = id;

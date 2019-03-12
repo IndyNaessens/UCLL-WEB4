@@ -5,10 +5,20 @@
     <header th:fragment="standard" class="mx-auto">
         <img th:src="@{/images/banner.jpg}" class="img-fluid mx-auto d-block" alt="Responsive banner let's chat">
         <h1 class="my-3">Chat App</h1>
+    </header>
+
+    <header th:fragment="authenticated" class="mx-auto">
+        <img th:src="@{/images/banner.jpg}" class="img-fluid mx-auto d-block" alt="Responsive banner let's chat">
+        <h1 class="my-3">Chat App</h1>
 
         <ul class="nav justify-content-end">
             <li class="nav-item">
-                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link active" th:href="@{/home}">Home</a>
+            </li>
+            <li class="nav-item">
+                <form th:action="@{/logout}" th:method="post">
+                    <button type="submit" class="btn btn-link">Logout</button>
+                </form>
             </li>
         </ul>
     </header>

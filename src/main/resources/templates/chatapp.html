@@ -1,14 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-    <script src="main.js"></script>
-</head>
-<body>
-    <h1>Logged In</h1>
-</body>
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="fragments/head::standard( ~{::title}) ">
+        <title>ChatApp - Home</title>
+    </head>
+
+    <body th:replace="fragments/body::standard( ~{fragments/header::authenticated}, ~{::main}, ~{fragments/footer::standard}, ~{::script} )">
+
+        <main>
+            <h2 id="welcomeHeader" >Welkom <span th:text="${fullName}" th:remove="tag"></span> </h2>
+            <h3 id="status" class="text-right" th:text="${status}"></h3>
+
+            <div class="my-3">
+                <p class="my-0">
+                    <label for="changeStatusInput">Change status</label>
+                </p>
+                <p class="my-0">
+                    <input type="text" id="changeStatusInput"/>
+                    <button type="button" id="changeStatusButton" class="btn btn-outline-dark">Change</button>
+                </p>
+            </div>
+
+            <div class="my-3">
+                <p class="my-0">
+                    <label for="addFriendInput">Add friend</label>
+                </p>
+                <p class="my-0">
+                    <input type="text" id="addFriendInput"/>
+                    <button type="button" id="addFriendButton" class="btn btn-outline-dark">Add</button>
+                </p>
+            </div>
+
+        </main>
+
+        <script th:src="@{/js/deelopdrachtEen.js}"></script>
+    </body>
+
 </html>
