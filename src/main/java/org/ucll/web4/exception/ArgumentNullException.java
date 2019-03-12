@@ -1,8 +1,8 @@
-package org.ucll.web4.exceptions;
+package org.ucll.web4.exception;
 
 public class ArgumentNullException extends RuntimeException {
 
-    public ArgumentNullException(){
+    public ArgumentNullException() {
         super();
     }
 }

@@ -1,4 +1,4 @@
-package org.ucll.web4.security;
+package org.ucll.web4.spring.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
-    public SecurityConfig(@Qualifier("userDetailsServiceImpl") @Autowired UserDetailsService userDetailsService){
+    public SecurityConfig(@Qualifier("userDetailsServiceImpl") @Autowired UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
@@ -25,8 +25,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()   //just for school, will always run local
                 .authorizeRequests()
-                .antMatchers("/images/**","/login").permitAll()
+                .antMatchers("/images/**", "/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -37,7 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/logout-success")
-                .permitAll();
+                .permitAll()
+                .and()
+                .httpBasic();
     }
 
     @Override

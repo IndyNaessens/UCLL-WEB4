@@ -1,10 +1,10 @@
-package org.ucll.web4;
+package org.ucll.web4.repository;
 
 import java.util.List;
 
-public interface GenericRepository<T,K> {
+public interface GenericRepository<T, K> {
 
-    void create(T entity,K key);
+    void create(T entity, K key);
 
     T get(K key);
 

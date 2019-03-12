@@ -1,8 +1,8 @@
-package org.ucll.web4.exceptions;
+package org.ucll.web4.exception;
 
 public class UserDoesNotExistException extends RuntimeException {
 
-    public UserDoesNotExistException(){
+    public UserDoesNotExistException() {
         super();
     }
 }

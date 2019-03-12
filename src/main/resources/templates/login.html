@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/head::header( ~{::title} ) ">
+<head th:replace="fragments/head::standard( ~{::title} ) ">
     <title>ChatApp - Login</title>
 </head>
 
-<body th:replace="fragments/generic::body( ~{fragments/headers::standard}, ~{::main}, ~{fragments/footers::standard} )">
+<body th:replace="fragments/body::standard( ~{fragments/header::standard}, ~{::main}, ~{fragments/footer::standard} )">
 
     <main>
         <div class="mx-auto">
