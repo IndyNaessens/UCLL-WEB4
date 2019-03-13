@@ -47,11 +47,11 @@ public class UserController {
         return userDetails.getStatus();
     }
 
-    @GetMapping("/{userId}/friends")
+    @GetMapping("/friend")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public List<FriendDto> getFriendList(@PathVariable UUID userId) {
-        return userService.getFriendList(userId);
+    public List<FriendDto> getFriendList(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        return userService.getFriendList(userDetails.getUserId());
     }
 
     @PostMapping("/friend")

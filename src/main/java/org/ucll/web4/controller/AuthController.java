@@ -34,7 +34,7 @@ public class AuthController {
     }
 
     @GetMapping("/logout-success")
-    public RedirectView logoutSuccessGet() {
+    public RedirectView logoutSuccess() {
         return new RedirectView("/login?logout");
     }
 }
