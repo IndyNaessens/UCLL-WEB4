@@ -34,17 +34,12 @@ public class UserController {
 
     //set status
     @PutMapping(value = "/status")
-    @ResponseStatus(HttpStatus.OK)
-    public void changeStatus(@AuthenticationPrincipal CustomUserDetails userDetails, ChangeStatusDto changeStatusDto) {
-        userService.changeUserStatus(userDetails.getUserId(), changeStatusDto.getStatus());
-    }
-
-    //get status
-    @GetMapping(value = "/status")
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    public String getStatus(@AuthenticationPrincipal CustomUserDetails userDetails){
-        return userDetails.getStatus();
+    public HttpStatus changeStatus(@AuthenticationPrincipal CustomUserDetails userDetails, ChangeStatusDto changeStatusDto) {
+        userService.changeUserStatus(userDetails.getUserId(), changeStatusDto.getStatus());
+
+        return HttpStatus.OK; //avoid empty response because firefox gives error "XML Parsing Error: no root element found"
     }
 
     @GetMapping("/friend")
@@ -55,12 +50,15 @@ public class UserController {
     }
 
     @PostMapping("/friend")
+    @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public void addFriend(@AuthenticationPrincipal CustomUserDetails userDetails, AddFriendDto addFriendDto) {
+    public HttpStatus addFriend(@AuthenticationPrincipal CustomUserDetails userDetails, AddFriendDto addFriendDto) {
         UUID userIdFriend = userService.getUserIdFromEmail(addFriendDto.getEmail());
         UUID userId = userDetails.getUserId();
 
         userService.addFriend(userId, userIdFriend);
         userService.addFriend(userIdFriend, userId);
+
+        return HttpStatus.CREATED; //avoid empty response because firefox gives error "XML Parsing Error: no root element found"
     }
 }
