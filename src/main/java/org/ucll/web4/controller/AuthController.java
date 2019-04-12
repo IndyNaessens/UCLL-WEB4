@@ -1,16 +1,21 @@
 package org.ucll.web4.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+import org.ucll.web4.service.BlogService;
 
 @Controller
 public class AuthController {
 
-    public AuthController() {
+    private final BlogService blogService;
+
+    public AuthController(@Autowired BlogService blogService) {
+        this.blogService = blogService;
     }
 
     @GetMapping("/login")
@@ -19,6 +24,7 @@ public class AuthController {
 
         if (error != null) mav.addObject("loginError", "True");
         if (logout != null) mav.addObject("logoutSuccess", "True");
+        mav.addObject("blogs", blogService.getBlogTopics());
 
         return mav;
     }

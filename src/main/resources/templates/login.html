@@ -19,6 +19,19 @@
                 <input type="submit" value="Log in" />
             </form>
         </div>
+
+        <h2 class="mt-3">Blog</h2>
+        <div class="card my-3" th:each="blog,iterStat : ${blogs}">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${blog.title}"></h5>
+                <p th:id="'latest-' + ${iterStat.count}">
+                    <input type="text" th:id="'name-' + ${iterStat.count}" placeholder="Name">
+                    <input type="text" th:id="'comment-' + ${iterStat.count}" placeholder="Comment">
+                    <input type="number" th:id="'score-' + ${iterStat.count}" min="0" max="10" value="5">
+                    <button type="button" class="btn btn-outline-dark" th:id="'commentButton-' + ${iterStat.count}">OK</button>
+                </p>
+            </div>
+        </div>
     </main>
 
 </body>
