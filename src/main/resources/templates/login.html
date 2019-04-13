@@ -5,7 +5,7 @@
     <title>ChatApp - Login</title>
 </head>
 
-<body th:replace="fragments/body::standard( ~{fragments/header::standard}, ~{::main}, ~{fragments/footer::standard}, ~{} )">
+<body th:replace="fragments/body::standard( ~{fragments/header::standard}, ~{::main}, ~{fragments/footer::standard}, ~{::script} )">
 
     <main>
         <div class="mx-auto">
@@ -24,7 +24,7 @@
         <div class="card my-3" th:each="blog,iterStat : ${blogs}">
             <div class="card-body">
                 <h5 class="card-title" th:text="${blog.title}"></h5>
-                <p th:id="'latest-' + ${iterStat.count}">
+                <p th:id="'form-' + ${iterStat.count}">
                     <input type="text" th:id="'name-' + ${iterStat.count}" placeholder="Name">
                     <input type="text" th:id="'comment-' + ${iterStat.count}" placeholder="Comment">
                     <input type="number" th:id="'score-' + ${iterStat.count}" min="0" max="10" value="5">
@@ -34,6 +34,7 @@
         </div>
     </main>
 
+    <script th:src="@{/js/deelopdrachtTwee.js}"></script>
 </body>
 
 </html>
