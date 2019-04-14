@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.ucll.web4.service.BlogService;
-import org.ucll.web4.service.UserService;
 import org.ucll.web4.spring.security.CustomUserDetails;
 
 

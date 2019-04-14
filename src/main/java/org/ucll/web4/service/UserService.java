@@ -3,12 +3,10 @@ package org.ucll.web4.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.ucll.web4.dto.FriendDto;
-import org.ucll.web4.entity.BlogEntity;
 import org.ucll.web4.entity.UserEntity;
 import org.ucll.web4.exception.ArgumentEmptyException;
 import org.ucll.web4.exception.ArgumentNullException;
 import org.ucll.web4.exception.UserDoesNotExistException;
-import org.ucll.web4.repository.blog.BlogRepository;
 import org.ucll.web4.repository.friendlist.UserFriendListRepository;
 import org.ucll.web4.repository.user.UserRepository;
 

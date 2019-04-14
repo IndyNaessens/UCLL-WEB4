@@ -30,6 +30,7 @@ window.onload = function () {
 
         currentForm.parentNode.insertBefore(paragraph,currentForm);
     };
+
 };
 
 
