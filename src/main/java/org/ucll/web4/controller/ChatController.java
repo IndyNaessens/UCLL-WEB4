@@ -22,17 +22,15 @@ import java.util.stream.Collectors;
 public class ChatController {
 
     private final ChatService chatService;
-    private final UserService userService;
 
-    public ChatController(@Autowired ChatService chatService, @Autowired UserService userService){
+    public ChatController(@Autowired ChatService chatService){
         this.chatService = chatService;
-        this.userService = userService;
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public List<ChatMessageDto> getAllMessages(@PathVariable String email, @AuthenticationPrincipal CustomUserDetails userDetails){
-        return chatService.getAllChatMessages(new ChatPairEntity(userService.getUserIdFromEmail(email), userDetails.getUserId()))
+    public List<ChatMessageDto> getAllMessages(@PathVariable UUID userId, @AuthenticationPrincipal CustomUserDetails userDetails){
+        return chatService.getAllChatMessages(new ChatPairEntity(userId, userDetails.getUserId()))
                 .stream()
                 .map(chatMessageEntity -> ChatMessageDto.convertFromEntity(chatMessageEntity,userDetails.getUserId()))
                 .collect(Collectors.toList());
@@ -42,7 +40,7 @@ public class ChatController {
     @ResponseStatus(HttpStatus.OK)
     public HttpStatus sendChatMessage(@Valid @RequestBody SendChatMessageDto sendChatMessageDto, @AuthenticationPrincipal CustomUserDetails userDetails){
         UUID sender = userDetails.getUserId();
-        UUID receiver = userService.getUserIdFromEmail(sendChatMessageDto.getEmailReceiver());
+        UUID receiver = sendChatMessageDto.getUserIdReceiver();
 
         ChatMessageEntity chatMessageEntity = new ChatMessageEntity.Builder()
                 .from(sender)

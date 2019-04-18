@@ -27,18 +27,19 @@
                         <label for="addFriendInput">Add friend</label>
                     </p>
                     <p class="my-0">
-                        <input type="text" id="addFriendInput"/>
+                        <input type="text" id="addFriendInput" value="wesly@naessens.net"/>
                         <button type="button" id="addFriendButton" class="btn btn-outline-dark">Add</button>
                     </p>
                 </div>
 
                 <h4>Friends</h4>
-                <table class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover" id="friends">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
                             <th scope="col">Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="tableFriendListBody">
@@ -48,8 +49,11 @@
             </div>
         </main>
 
-        <script th:src="@{/js/util.js}"></script>
-        <script th:src="@{/js/deelopdrachtEen.js}"></script>
+        <script th:src="@{/js/util-1.js}"></script>
+        <script th:src="@{/js/deelopdracht-1_3.js}"></script>
+
+        <script th:src="@{/js/util-3.js}"></script>
+        <script th:src="@{/js/deelopdracht-3.js}"></script>
     </body>
 
 </html>

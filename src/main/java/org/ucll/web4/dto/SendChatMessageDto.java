@@ -1,29 +1,31 @@
 package org.ucll.web4.dto;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class SendChatMessageDto {
 
-    @NotBlank
-    private String emailReceiver;
+    @NotNull
+    private UUID userIdReceiver;
 
     @NotBlank
     private String message;
 
     private LocalDateTime sendDate = LocalDateTime.now();
 
-    public SendChatMessageDto(String emailReceiver, String message) {
-        this.emailReceiver = emailReceiver;
+    public SendChatMessageDto(UUID userIdReceiver, String message) {
+        this.userIdReceiver = userIdReceiver;
         this.message = message;
     }
 
-    public String getEmailReceiver() {
-        return emailReceiver;
+    public UUID getUserIdReceiver() {
+        return userIdReceiver;
     }
 
-    public void setEmailReceiver(String emailReceiver) {
-        this.emailReceiver = emailReceiver;
+    public void setUserIdReceiver(UUID userIdReceiver) {
+        this.userIdReceiver = userIdReceiver;
     }
 
     public String getMessage() {
@@ -37,5 +39,4 @@ public class SendChatMessageDto {
     public LocalDateTime getSendDate() {
         return sendDate;
     }
-
 }
