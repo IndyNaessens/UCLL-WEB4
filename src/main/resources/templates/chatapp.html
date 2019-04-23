@@ -13,23 +13,21 @@
                 <h3 id="status" class="text-right" th:text="${status}"></h3>
 
                 <div class="my-3">
-                    <p class="my-0">
-                        <label for="changeStatusInput">Change status</label>
-                    </p>
-                    <p class="my-0">
-                        <input type="text" id="changeStatusInput"/>
-                        <button type="button" id="changeStatusButton" class="btn btn-outline-dark">Change</button>
-                    </p>
+                    <label for="changeStatusInput">Change status</label>
+
+                    <div class="my-1">
+                        <input type="text" class="form-control w-50 d-inline" id="changeStatusInput"/>
+                        <button type="button" id="changeStatusButton" class="btn btn-outline-dark d-inline">Change</button>
+                    </div>
                 </div>
 
                 <div class="my-3">
-                    <p class="my-0">
-                        <label for="addFriendInput">Add friend</label>
-                    </p>
-                    <p class="my-0">
-                        <input type="text" id="addFriendInput" value="wesly@naessens.net"/>
-                        <button type="button" id="addFriendButton" class="btn btn-outline-dark">Add</button>
-                    </p>
+                    <label for="addFriendInput">Add friend</label>
+
+                    <div class="my-1">
+                        <input type="text" class="form-control w-50 d-inline" id="addFriendInput" value="wesly@naessens.net"/>
+                        <button type="button" id="addFriendButton" class="btn btn-outline-dark d-inline">Add</button>
+                    </div>
                 </div>
 
                 <h4>Friends</h4>
@@ -46,13 +44,15 @@
 
                     </tbody>
                 </table>
+
+                <div id="chat-flex" class="d-flex flex-row-reverse fixed-bottom">
+
+                </div>
             </div>
         </main>
 
-        <script th:src="@{/js/util-1.js}"></script>
-        <script th:src="@{/js/deelopdracht-1_3.js}"></script>
-
-        <script th:src="@{/js/util-3.js}"></script>
+        <script th:src="@{/js/request-lib.js}"></script>
+        <script th:src="@{/js/deelopdracht-1.js}"></script>
         <script th:src="@{/js/deelopdracht-3.js}"></script>
     </body>
 

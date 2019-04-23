@@ -12,11 +12,15 @@
             <p th:if="${loginError}" class="text-danger">Wrong username or password</p>
             <p th:if="${logoutSuccess}" class="text-success">You've been logged out successfully</p>
             <form th:action="@{/login}" th:method="post">
-                <label for="username">Username</label>:
-                <input type="text" id="username" name="username" autofocus="autofocus" /> <br />
-                <label for="password">Password</label>:
-                <input type="password" id="password" name="password" /> <br />
-                <input type="submit" value="Log in" />
+                <p>
+                    <label for="username">Username</label>:
+                    <input type="text" class="form-control w-50" id="username" name="username" autofocus="autofocus" />
+                </p>
+                <p>
+                    <label for="password">Password</label>:
+                    <input type="password" class="form-control w-50" id="password" name="password" />
+                </p>
+                <input type="submit" class="btn btn-outline-dark" value="Log in" />
             </form>
         </div>
 
@@ -25,9 +29,9 @@
             <div class="card-body">
                 <h5 class="card-title" th:text="${blog.title}"></h5>
                 <p th:id="'form-' + ${iterStat.count}">
-                    <input type="text" th:id="'name-' + ${iterStat.count}" placeholder="Name">
-                    <input type="text" th:id="'comment-' + ${iterStat.count}" placeholder="Comment">
-                    <input type="number" th:id="'score-' + ${iterStat.count}" min="0" max="10" value="5">
+                    <input type="text" class="form-control w-50 my-2" th:id="'name-' + ${iterStat.count}" placeholder="Name">
+                    <input type="text" class="form-control my-2" th:id="'comment-' + ${iterStat.count}" placeholder="Comment">
+                    <input type="number" class="form-control w-50 my-2" th:id="'score-' + ${iterStat.count}" min="0" max="10" value="5">
                     <button type="button" class="btn btn-outline-dark" th:id="'commentButton-' + ${iterStat.count}">OK</button>
                 </p>
             </div>

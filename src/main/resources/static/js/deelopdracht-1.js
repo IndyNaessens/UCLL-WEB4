@@ -1,6 +1,6 @@
 //get friend list and set interval for polling
 window.onload = getFriendList;
-let getFriendListIntervalId = setInterval(getFriendList, 2000);
+let getFriendListIntervalId = setInterval(getFriendList, 1500);
 
 //change status button action
 document.getElementById("changeStatusButton").onclick = function () {
@@ -35,7 +35,7 @@ document.getElementById("addFriendButton").onclick = function () {
         //get new friendlist and restart interval
         clearInterval(getFriendListIntervalId);
         getFriendList();
-        getFriendListIntervalId = setInterval(getFriendList,2000);
+        getFriendListIntervalId = setInterval(getFriendList,1500);
     });
 };
 
@@ -49,11 +49,9 @@ function getFriendList() {
         //parse to json
         let response = JSON.parse(responseText);
 
-        //remove tbody childeren
+        //get and clear tbody
         let tbody = document.getElementById("tableFriendListBody");
-        while (tbody.hasChildNodes()) {
-            tbody.removeChild(tbody.lastChild);
-        }
+        tbody.innerHTML = '';
 
         //add rows to tbody
         for(let i=0;i<response.length;i++) {
@@ -74,21 +72,14 @@ function getFriendList() {
             let chatButton = document.createElement("button");
             chatButton.className = "btn btn-outline-dark";
             chatButton.type = "button";
-            chatButton.id = response[i].userId;
             chatButton.innerText = "Chat now";
             chatButton.onclick = function(){
-                //make chatbox and go to chatbox
-                let userReceiverId = $(this).attr('id');
-                let userReceiverName = $(this).parent().parent().children().eq(1).text();
-
-                let chatbox = new Chatbox();
-                chatbox.createAndInsertChatbox(userReceiverId,userReceiverName);
+                createAndInsertChatbox(response[i].userId,response[i].firstName + " " + response[i].lastName);
 
                 //disable button immediately
-                if($('#chat-' + chatButton.id).length){
-                    $('#' + chatButton.id).prop("disabled",true);
-                }
+                chatButton.disabled = true;
 
+                //go to  bottom where chatbox is
                 $('html, body').animate({scrollTop:$(document).height()}, 'slow');
             };
 
@@ -101,8 +92,8 @@ function getFriendList() {
             tbody.append(row);
 
             //disable button if needed
-            if($('#chat-' + chatButton.id).length){
-                $('#' + chatButton.id).prop("disabled",true);
+            if($('#chatbox-' + response[i].userId).length){
+                chatButton.disabled = true;
             }
         }
     });
