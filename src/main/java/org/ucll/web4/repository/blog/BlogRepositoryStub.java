@@ -2,7 +2,6 @@ package org.ucll.web4.repository.blog;
 
 import org.springframework.stereotype.Repository;
 import org.ucll.web4.entity.BlogEntity;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,12 +55,14 @@ public class BlogRepositoryStub implements BlogRepository {
 
     @Override
     public BlogEntity get(UUID key) {
-        throw new NotImplementedException();
+        //no implementation needed
+        throw new RuntimeException();
     }
 
     @Override
     public void update(BlogEntity entity) {
-        throw new NotImplementedException();
+        //no implementation needed
+        throw new RuntimeException();
     }
 
     @Override
@@ -71,6 +72,7 @@ public class BlogRepositoryStub implements BlogRepository {
 
     @Override
     public boolean exists(UUID key) {
-        throw new NotImplementedException();
+        //no implementation needed
+        throw new RuntimeException();
     }
 }
