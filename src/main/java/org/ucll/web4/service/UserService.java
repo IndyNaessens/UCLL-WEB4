@@ -3,9 +3,11 @@ package org.ucll.web4.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.ucll.web4.dto.FriendDto;
+import org.ucll.web4.dto.UserRegistrationDto;
 import org.ucll.web4.entity.UserEntity;
 import org.ucll.web4.exception.ArgumentEmptyException;
 import org.ucll.web4.exception.ArgumentNullException;
+import org.ucll.web4.exception.UserAlreadyExistsException;
 import org.ucll.web4.exception.UserDoesNotExistException;
 import org.ucll.web4.repository.friendlist.UserFriendListRepository;
 import org.ucll.web4.repository.user.UserRepository;
@@ -23,6 +25,18 @@ public class UserService {
     public UserService(@Autowired UserRepository userRepository, @Autowired UserFriendListRepository friendListRepository) {
         this.userRepository = userRepository;
         this.friendListRepository = friendListRepository;
+    }
+
+    //register a new user
+    public void registerUser(UserRegistrationDto userRegistrationDto){
+        if(userRegistrationDto == null) throw new ArgumentNullException();
+
+        //check if user already exists
+        if(containsEmail(userRegistrationDto.getEmail())) throw new UserAlreadyExistsException();
+
+        //add user to the repo
+        var newUser = userRegistrationDto.convertToEntity();
+        userRepository.create(newUser,newUser.getUserId());
     }
 
     //change the status of a user
@@ -72,6 +86,17 @@ public class UserService {
                 .findFirst()
                 .orElseThrow(UserDoesNotExistException::new)
                 .getUserId();
+    }
+
+    private boolean containsEmail(String email){
+        //checks
+        if (email == null) throw new ArgumentNullException();
+        if (email.trim().isEmpty()) throw new ArgumentEmptyException();
+
+        for(UserEntity user : getUserOverview()){
+            if(user.getEmail().equals(email)) return true;
+        }
+        return false;
     }
 
     public List<UserEntity> getUserOverview() {

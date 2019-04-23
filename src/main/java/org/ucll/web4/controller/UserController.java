@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.ucll.web4.dto.AddFriendDto;
 import org.ucll.web4.dto.ChangeStatusDto;
 import org.ucll.web4.dto.FriendDto;
+import org.ucll.web4.dto.UserRegistrationDto;
 import org.ucll.web4.entity.UserEntity;
 import org.ucll.web4.service.UserService;
 import org.ucll.web4.spring.security.CustomUserDetails;
@@ -29,6 +30,15 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public List<UserEntity> getUserOverview() {
         return userService.getUserOverview();
+    }
+
+    //register user
+    @PostMapping
+    @ResponseStatus(HttpStatus.OK)
+    public HttpStatus registerUser(@Valid UserRegistrationDto userRegistrationDto){
+        userService.registerUser(userRegistrationDto);
+
+        return HttpStatus.OK;
     }
 
     //set status

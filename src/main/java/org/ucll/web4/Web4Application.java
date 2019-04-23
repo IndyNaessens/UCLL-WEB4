@@ -29,8 +29,10 @@ public class Web4Application {
                     .withFirstName("Indy")
                     .withLastName("Naessens")
                     .withPassword(passwordEncoder.encode("123indy"))
-                    .withEmail("indy.naessens@pm.me")
+                    .withEmail("indy@naessens.net")
                     .withDefaultStatus()
+                    .isMale()
+                    .hasAge(21)
                     .build();
 
             UserEntity user2 = new UserEntity.Builder()
@@ -40,6 +42,8 @@ public class Web4Application {
                     .withPassword(passwordEncoder.encode("123wesly"))
                     .withEmail("wesly@naessens.net")
                     .withDefaultStatus()
+                    .isMale()
+                    .hasAge(20)
                     .build();
 
             UserEntity user3 = new UserEntity.Builder()
@@ -49,6 +53,8 @@ public class Web4Application {
                     .withPassword(passwordEncoder.encode("123keany"))
                     .withEmail("keany@naessens.net")
                     .withDefaultStatus()
+                    .isMale()
+                    .hasAge(18)
                     .build();
 
             UserEntity user4 = new UserEntity.Builder()
@@ -58,6 +64,8 @@ public class Web4Application {
                     .withPassword(passwordEncoder.encode("123hanne"))
                     .withEmail("hanne@boonen.net")
                     .withDefaultStatus()
+                    .isFemale()
+                    .hasAge(21)
                     .build();
 
             userRepository.create(user1, user1.getUserId());

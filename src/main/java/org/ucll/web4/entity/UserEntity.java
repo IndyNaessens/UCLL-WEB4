@@ -11,16 +11,19 @@ public class UserEntity {
     private final String lastName;
     private final String email; //unique
     private final String password;
+    private final int age;
+    private final String gender;
     private String status;
 
     //constructors
-    private UserEntity(UUID id, String firstName, String lastName, String email, String password, String status) {
+    private UserEntity(UUID id, String firstName, String lastName, String email, String password, int age, String gender) {
         this.userId = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.status = status;
+        this.age = age;
+        this.gender = gender;
     }
 
     //getters
@@ -46,6 +49,14 @@ public class UserEntity {
 
     public String getStatus() {
         return status;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getGender() {
+        return gender;
     }
 
     //setters
@@ -75,6 +86,8 @@ public class UserEntity {
         private String lastName;
         private String email;
         private String password;
+        private int age;
+        private String gender;
         private String status;
 
         public Builder withId(UUID id) {
@@ -117,8 +130,31 @@ public class UserEntity {
             return this;
         }
 
+        public Builder isMale(){
+            this.gender = "Male";
+            return this;
+        }
+
+        public Builder isFemale(){
+            this.gender = "Female";
+            return this;
+        }
+
+        public Builder withGender(String gender){
+            this.gender = gender;
+            return this;
+        }
+
+        public Builder hasAge(int age){
+            this.age = age;
+            return this;
+        }
+
         public UserEntity build() {
-            return new UserEntity(id, firstName, lastName, email, password, status);
+            var user = new UserEntity(id, firstName, lastName, email, password, age, gender);
+            user.setStatus(status);
+
+            return user;
         }
     }
 }
