@@ -31,7 +31,7 @@ public class AuthController {
 
     @PostMapping("/login-success")
     public RedirectView loginSuccess() {
-        return new RedirectView("/home");
+        return new RedirectView("/chat");
     }
 
     @PostMapping("/login-failed")

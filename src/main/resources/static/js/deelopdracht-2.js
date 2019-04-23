@@ -15,7 +15,10 @@ window.onload = function () {
                 let currentParent = item.parentNode;
                 let currentParentNumber = currentParent.id.split("-")[1];
 
-                currentParent.querySelector("#name-" + currentParentNumber).value = "";
+                //only clear the name if the user is not logged in
+                if(!(document.getElementById('welcomeHeader'))){
+                    currentParent.querySelector("#name-" + currentParentNumber).value = "";
+                }
                 currentParent.querySelector("#comment-" + currentParentNumber).value = "";
                 currentParent.querySelector("#score-" + currentParentNumber).value = 5;
             }

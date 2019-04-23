@@ -20,12 +20,22 @@ public class PageController {
 
 
     @GetMapping({"/", "/home"})
-    public ModelAndView getIndex(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        ModelAndView mav = new ModelAndView("chatapp");
+    public ModelAndView getHome(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        ModelAndView mav = new ModelAndView("home");
 
         mav.addObject("fullName",userDetails.getFullName());
         mav.addObject("status", userDetails.getStatus());
         mav.addObject("blogs", blogService.getBlogTopics());
+
+        return mav;
+    }
+
+    @GetMapping({"/chat"})
+    public ModelAndView getChat(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        ModelAndView mav = new ModelAndView("chatapp");
+
+        mav.addObject("fullName",userDetails.getFullName());
+        mav.addObject("status", userDetails.getStatus());
 
         return mav;
     }

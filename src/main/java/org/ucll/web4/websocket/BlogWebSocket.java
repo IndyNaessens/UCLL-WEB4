@@ -25,7 +25,7 @@ public class BlogWebSocket {
     public void onMessage(String message){
         int score = Integer.parseInt(message.split(",")[3]);
 
-        if(score < 1 || score > 10) throw new IllegalArgumentException("Score must be between 0 and 10");
+        if(score < 1 || score > 10) return;
 
         //broadcast message
         sessions.forEach(s -> {
