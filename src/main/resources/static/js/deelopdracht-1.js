@@ -4,18 +4,31 @@ let getFriendListIntervalId = setInterval(getFriendList, 1500);
 
 //change status button action
 document.getElementById("changeStatusButton").onclick = function () {
-    let changeStatusInput = document.getElementById("changeStatusInput");
+    let changeStatusInputValue = document.querySelector('input[name="changeStatusRadioOptions"]:checked').value;
 
+    //custom status is selected
+    if(changeStatusInputValue === ''){
+        changeStatusInputValue = document.getElementById('changeStatusInput').value;
+    }
+
+    //build and send request
     let requestHelper = new RequestHelper.Builder()
         .withRequestInfo("PUT","/api/user/status",200)
-        .withErrorHandling("Status changed successfully","Changing status failed!",changeStatusInput)
-        .withPayload(new RequestParameter("status",changeStatusInput.value))
+        .withErrorHandling("Status changed successfully","Changing status failed!",document.getElementById('changeStatusContainer'))
+        .withPayload(new RequestParameter("status",changeStatusInputValue))
         .build();
 
     //response is OK so we can assume the new status has been set server side
     requestHelper.sendRequest(function(){
-        document.getElementById("status").innerText = changeStatusInput.value;
-        changeStatusInput.value = '';
+        document.getElementById("status").innerText = changeStatusInputValue;
+
+        //reset radio buttons
+        let radioButtons = document.getElementsByName('changeStatusRadioOptions');
+        for(let i=0;i<radioButtons.length;i++){
+            radioButtons[i].checked = i === 0;  //first radio button is checked others are unchecked
+        }
+        //clear input field
+        document.getElementById('changeStatusInput').value = '';
     })
 };
 
@@ -23,6 +36,7 @@ document.getElementById("changeStatusButton").onclick = function () {
 document.getElementById("addFriendButton").onclick = function () {
     let addFriendInput = document.getElementById("addFriendInput");
 
+    //build and send request
     let requestHelper = new RequestHelper.Builder()
         .withRequestInfo("POST","/api/user/friend",201)
         .withErrorHandling("Friend added successfully","Adding new friend failed!",addFriendInput)

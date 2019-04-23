@@ -13,20 +13,36 @@
                 <h3 id="status" class="text-right" th:text="${status}"></h3>
 
                 <div class="my-3">
-                    <label for="changeStatusInput">Change status</label>
+                    <h4>Change status:</h4>
 
-                    <div class="my-1">
-                        <input type="text" class="form-control w-50 d-inline" id="changeStatusInput"/>
-                        <button type="button" id="changeStatusButton" class="btn btn-outline-dark d-inline">Change</button>
-                    </div>
-                </div>
+                    <div class="my-1" id="changeStatusContainer">
+                        <div class="form-check">
+                            <input class="form-check-input" name="changeStatusRadioOptions" type="radio" id="radio1" value="Online" checked>
+                            <label class="form-check-label" for="radio1">
+                                Online
+                            </label>
+                        </div>
 
-                <div class="my-3">
-                    <label for="addFriendInput">Add friend</label>
+                        <div class="form-check">
+                            <input class="form-check-input" name="changeStatusRadioOptions" type="radio" id="radio2" value="Offline">
+                            <label class="form-check-label" for="radio2">
+                                Offline
+                            </label>
+                        </div>
 
-                    <div class="my-1">
-                        <input type="text" class="form-control w-50 d-inline" id="addFriendInput" value="wesly@naessens.net"/>
-                        <button type="button" id="addFriendButton" class="btn btn-outline-dark d-inline">Add</button>
+                        <div class="form-check disabled">
+                            <input class="form-check-input" name="changeStatusRadioOptions" type="radio" id="radio3" value="Away">
+                            <label class="form-check-label" for="radio3">
+                                Away
+                            </label>
+                        </div>
+
+                        <div class="form-check disabled">
+                            <input class="form-check-input" name="changeStatusRadioOptions" type="radio" id="radio4" value="">
+                            <input type="text" class="form-control form-control-sm w-50 d-inline" id="changeStatusInput" placeholder="Other status here ..."/>
+                        </div>
+
+                        <button type="button" id="changeStatusButton" class="btn btn-outline-dark d-inline my-2">Change</button>
                     </div>
                 </div>
 
@@ -44,6 +60,15 @@
 
                     </tbody>
                 </table>
+
+                <div class="my-3">
+                    <label for="addFriendInput" class="mb-1">Add friend:</label>
+
+                    <div id="addFriendContainer">
+                        <input type="text" class="form-control w-50 d-inline" id="addFriendInput" value="wesly@naessens.net"/>
+                        <button type="button" id="addFriendButton" class="btn btn-outline-dark d-inline">Add</button>
+                    </div>
+                </div>
 
                 <div id="chat-flex" class="d-flex flex-row-reverse fixed-bottom">
 

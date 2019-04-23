@@ -66,7 +66,7 @@ function createAndInsertChatbox(userIdReceiver, receiverName){
     polChatmessages(userIdReceiver);
 
     //give space between chatbox & friends table
-    $('#friends').attr('style','margin-bottom: 25em;');
+    $('#addFriendContainer').attr('style','margin-bottom: 25em;');
 }
 
 function getChatMessages(userIdReceiver){
@@ -148,6 +148,6 @@ function closeChatbox(userIdReceiver) {
 
     //if last chatbox remove white space after friends table
     if(intervalIds.length === 0){
-        $('#friends').removeAttr('style');
+        $('#addFriendContainer').removeAttr('style');
     }
 }
