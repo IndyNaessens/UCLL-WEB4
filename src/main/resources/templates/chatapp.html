@@ -1,84 +1,94 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-    <head th:replace="fragments/head::standard( ~{::title}) ">
-        <title>ChatApp - Home</title>
-    </head>
+<head th:replace="fragments/head::standard( ~{::title}) ">
+    <title>ChatApp - Home</title>
+</head>
 
-    <body th:replace="fragments/body::standard( ~{fragments/header::authenticated}, ~{::main}, ~{fragments/footer::standard}, ~{::script} )">
+<body
+    th:replace="fragments/body::standard( ~{fragments/header::authenticated}, ~{::main}, ~{fragments/footer::standard}, ~{::script} )">
 
-        <main>
-            <div class="container">
-                <h2 id="welcomeHeader" >Welcome <span th:text="${fullName}" th:remove="tag"></span> </h2>
-                <h3 id="status" class="text-right" th:text="${status}"></h3>
+    <main>
+        <div class="container">
+            <h2 id="welcomeHeader">Welcome <span th:text="${fullName}" th:remove="tag"></span> </h2>
+            <h3 id="status" class="text-right" th:text="${status}"></h3>
 
-                <div class="my-3">
-                    <h4>Change status:</h4>
+            <div class="my-3">
+                <h4>Change status:</h4>
 
-                    <div class="my-1" id="changeStatusContainer">
-                        <div class="form-check">
-                            <input class="form-check-input" name="changeStatusRadioOptions" type="radio" id="radio1" value="Online" checked>
-                            <label class="form-check-label" for="radio1">
-                                Online
-                            </label>
-                        </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" name="changeStatusRadioOptions" type="radio" id="radio2" value="Offline">
-                            <label class="form-check-label" for="radio2">
-                                Offline
-                            </label>
-                        </div>
-
-                        <div class="form-check disabled">
-                            <input class="form-check-input" name="changeStatusRadioOptions" type="radio" id="radio3" value="Away">
-                            <label class="form-check-label" for="radio3">
-                                Away
-                            </label>
-                        </div>
-
-                        <div class="form-check disabled">
-                            <input class="form-check-input" name="changeStatusRadioOptions" type="radio" id="radio4" value="">
-                            <input type="text" class="form-control form-control-sm w-50 d-inline" id="changeStatusInput" placeholder="Other status here ..."/>
-                        </div>
-
-                        <button type="button" id="changeStatusButton" class="btn btn-outline-dark d-inline my-2">Change</button>
+                <div class="my-1" id="changeStatusContainer">
+                    <div class="form-check">
+                        <input class="form-check-input" name="changeStatusRadioOptions" type="radio" id="radio1"
+                            value="Online" checked>
+                        <label class="form-check-label" for="radio1">
+                            Online
+                        </label>
                     </div>
-                </div>
 
-                <h4>Friends</h4>
-                <table class="table table-bordered table-hover" id="friends">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableFriendListBody">
-
-                    </tbody>
-                </table>
-
-                <div class="my-3">
-                    <label for="addFriendInput" class="mb-1">Add friend:</label>
-
-                    <div id="addFriendContainer">
-                        <input type="text" class="form-control w-50 d-inline" id="addFriendInput" value="wesly@naessens.net"/>
-                        <button type="button" id="addFriendButton" class="btn btn-outline-dark d-inline">Add</button>
+                    <div class="form-check">
+                        <input class="form-check-input" name="changeStatusRadioOptions" type="radio" id="radio2"
+                            value="Offline">
+                        <label class="form-check-label" for="radio2">
+                            Offline
+                        </label>
                     </div>
-                </div>
 
-                <div id="chat-flex" class="d-flex flex-row-reverse fixed-bottom">
+                    <div class="form-check disabled">
+                        <input class="form-check-input" name="changeStatusRadioOptions" type="radio" id="radio3"
+                            value="Away">
+                        <label class="form-check-label" for="radio3">
+                            Away
+                        </label>
+                    </div>
 
+                    <div class="form-check disabled">
+                        <input class="form-check-input" name="changeStatusRadioOptions" type="radio" id="radio4"
+                            value="">
+                        <input type="text" class="form-control form-control-sm w-50 d-inline" id="changeStatusInput"
+                            placeholder="Other status here ..." />
+                    </div>
+
+                    <button type="button" id="changeStatusButton"
+                        class="btn btn-outline-dark d-inline my-2">Change</button>
                 </div>
             </div>
-        </main>
 
-        <script th:src="@{/js/request-lib.js}"></script>
-        <script th:src="@{/js/deelopdracht-1.js}"></script>
-        <script th:src="@{/js/deelopdracht-3.js}"></script>
-    </body>
+            <a href="#" id="friendlistToggle" class="text-dark text-decoration-none">
+                <h4>Friends (collapsible)</h4>
+            </a>
+            <table class="table table-bordered table-hover" id="friends">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tableFriendListBody">
+
+                </tbody>
+            </table>
+
+            <div class="my-3">
+                <label for="addFriendInput" class="mb-1">Add friend:</label>
+
+                <div id="addFriendContainer">
+                    <input type="text" class="form-control w-50 d-inline" id="addFriendInput"
+                        placeholder="wesly@naessens.net" />
+                    <button type="button" id="addFriendButton" class="btn btn-outline-dark d-inline">Add</button>
+                </div>
+            </div>
+
+            <div id="chat-flex" class="d-flex flex-row-reverse fixed-bottom">
+
+            </div>
+        </div>
+    </main>
+
+    <script th:src="@{/js/request-lib.js}"></script>
+    <script th:src="@{/js/deelopdracht-1.js}"></script>
+    <script th:src="@{/js/deelopdracht-3.js}"></script>
+</body>
 
 </html>

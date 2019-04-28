@@ -1,3 +1,7 @@
+$("#friendlistToggle").click(function () {
+    $("#friends").slideToggle("fast");
+});
+
 //list where inverval id's are kept
 let intervalIds = [];
 
