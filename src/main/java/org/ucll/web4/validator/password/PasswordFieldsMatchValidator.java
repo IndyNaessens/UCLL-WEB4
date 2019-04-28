@@ -12,6 +12,7 @@ public class PasswordFieldsMatchValidator implements ConstraintValidator<Passwor
 
     @Override
     public boolean isValid(UserRegistrationDto userRegistrationDto, ConstraintValidatorContext context) {
+        if(userRegistrationDto == null || userRegistrationDto.getPassword() == null) return false;
         return userRegistrationDto.getPassword().equals(userRegistrationDto.getPasswordConfirmation());
     }
 }

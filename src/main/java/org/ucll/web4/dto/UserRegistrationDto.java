@@ -8,30 +8,32 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
-@PasswordFieldsMatch
+@PasswordFieldsMatch(message = "The password needs to match!")
 public class UserRegistrationDto {
 
-    @NotBlank
+    @NotBlank(message = "First name must be filled in!")
     private String firstName;
 
-    @NotBlank
+    @NotBlank(message = "Last name must be filled in!")
     private String lastName;
 
-    @NotBlank
+    @NotBlank(message = "Email must be filled in!")
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "Password must be filled in!")
     private String password;
 
-    @NotBlank
+    @NotBlank(message = "Password confirmation must be filled in!")
     private String passwordConfirmation;
 
-    @Min(12)
-    @Max(110)
+    @Min(value = 12,message = "You must be at least 12 years old to register!")
+    @Max(value = 125,message = "125 years old is not realistic!")
     private int age;
 
-    @NotBlank
+    @NotBlank(message = "Gender must be filled in!")
     private String gender;
+
+    public UserRegistrationDto(){}
 
     public UserRegistrationDto(String firstName, String lastName, String email, String password, String passwordConfirmation, int age, String gender) {
         this.firstName = firstName;

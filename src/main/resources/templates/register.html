@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head::standard( ~{::title})">
+    <title>ChatApp - Login</title>
+</head>
+
+<body th:replace="fragments/body::standard( ~{fragments/header::standard}, ~{::main}, ~{fragments/footer::standard}, ~{} )">
+
+<main>
+    <div class="container">
+        <h2>Register now</h2>
+        <form th:action="@{/register}" th:object="${userRegistrationDto}" th:method="post">
+
+            <div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger" role="alert">
+                <p th:each="err : ${#fields.allErrors()}" th:text="${err}">...</p>
+            </div>
+
+            <p>
+                <label for="firstName">Firstname</label>:
+                <input type="text" class="form-control w-50" th:field="*{firstName}" autofocus="autofocus" />
+            </p>
+
+            <p>
+                <label for="lastName">Lastname</label>:
+                <input type="text" class="form-control w-50" th:field="*{lastName}"/>
+            </p>
+
+            <p>
+                <label for="email">Email</label>:
+                <input type="email" class="form-control w-50" th:field="*{email}"/>
+            </p>
+
+            <p>
+                <label for="password">Password</label>:
+                <input type="password" class="form-control w-50" th:field="*{password}"/>
+            </p>
+
+            <p>
+                <label for="passwordConfirmation">Password confirmation</label>:
+                <input type="password" class="form-control w-50" th:field="*{passwordConfirmation}"/>
+            </p>
+
+            <p>
+                <label for="age">Age</label>:
+                <input type="number" class="form-control w-50" th:field="*{age}"/>
+            </p>
+
+            <p>
+                <label for="gender">Gender</label>:
+                <input type="text" class="form-control w-50" th:field="*{gender}"/>
+            </p>
+
+            <input type="submit" class="btn btn-outline-dark" value="Register" />
+        </form>
+    </div>
+</main>
+
+<script th:src="@{/js/deelopdracht-2.js}"></script>
+</body>
+
+</html>

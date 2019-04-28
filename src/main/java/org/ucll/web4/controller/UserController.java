@@ -3,7 +3,10 @@ package org.ucll.web4.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
 import org.ucll.web4.dto.AddFriendDto;
 import org.ucll.web4.dto.ChangeStatusDto;
 import org.ucll.web4.dto.FriendDto;
@@ -30,15 +33,6 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public List<UserEntity> getUserOverview() {
         return userService.getUserOverview();
-    }
-
-    //register user
-    @PostMapping
-    @ResponseStatus(HttpStatus.OK)
-    public HttpStatus registerUser(@Valid UserRegistrationDto userRegistrationDto){
-        userService.registerUser(userRegistrationDto);
-
-        return HttpStatus.OK;
     }
 
     //set status

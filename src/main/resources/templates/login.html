@@ -11,6 +11,7 @@
         <div class="mx-auto">
             <p th:if="${loginError}" class="text-danger">Wrong username or password</p>
             <p th:if="${logoutSuccess}" class="text-success">You've been logged out successfully</p>
+            <p th:if="${registerSuccess}" class="text-success">Your account has been registered successfully! You can now log in.</p>
             <form th:action="@{/login}" th:method="post">
                 <p>
                     <label for="username">Username</label>:
