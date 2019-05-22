@@ -1,18 +1,30 @@
 package org.ucll.web4.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.Objects;
 import java.util.UUID;
 
 
 public class UserEntity {
 
+    @JsonIgnore
     private final UUID userId; //unique
-    private final String firstName;
-    private final String lastName;
+
+    private String firstName;
+
+    private String lastName;
+
     private final String email; //unique
+
+    @JsonIgnore
     private final String password;
-    private final int age;
-    private final String gender;
+
+    private int age;
+
+    private String gender;
+
+    @JsonIgnore
     private String status;
 
     //constructors
@@ -62,6 +74,22 @@ public class UserEntity {
     //setters
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     //equals and hashcode
