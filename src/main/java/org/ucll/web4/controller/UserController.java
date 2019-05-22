@@ -7,11 +7,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
-import org.ucll.web4.dto.AddFriendDto;
-import org.ucll.web4.dto.ChangeStatusDto;
-import org.ucll.web4.dto.FriendDto;
-import org.ucll.web4.dto.UserRegistrationDto;
+import org.ucll.web4.dto.*;
 import org.ucll.web4.entity.UserEntity;
+import org.ucll.web4.exception.ArgumentNullException;
 import org.ucll.web4.service.UserService;
 import org.ucll.web4.spring.security.CustomUserDetails;
 
@@ -31,8 +29,18 @@ public class UserController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<UserEntity> getUserOverview() {
         return userService.getUserOverview();
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(origins = "http://localhost:4200")
+    public HttpStatus updateUser(@RequestBody @Valid UpdateUserDto updateUserDto){
+        userService.updateUser(updateUserDto);
+
+        return HttpStatus.OK; //avoid empty response because firefox gives error "XML Parsing Error: no root element found"
     }
 
     //set status

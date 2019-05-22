@@ -3,6 +3,7 @@ package org.ucll.web4.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.ucll.web4.dto.FriendDto;
+import org.ucll.web4.dto.UpdateUserDto;
 import org.ucll.web4.dto.UserRegistrationDto;
 import org.ucll.web4.entity.UserEntity;
 import org.ucll.web4.exception.ArgumentEmptyException;
@@ -37,6 +38,20 @@ public class UserService {
         //add user to the repo
         var newUser = userRegistrationDto.convertToEntity();
         userRepository.create(newUser,newUser.getUserId());
+    }
+
+    //update an existing user
+    public void updateUser(UpdateUserDto updateUserDto){
+        if(updateUserDto == null) throw new ArgumentNullException();
+
+        //get the user that needs to be updated
+        var existingUser = userRepository.get(getUserIdFromEmail(updateUserDto.getEmail()));
+
+        //update the user
+        existingUser.setFirstName(updateUserDto.getFirstName());
+        existingUser.setLastName(updateUserDto.getLastName());
+        existingUser.setGender(updateUserDto.getGender());
+        existingUser.setAge(updateUserDto.getAge());
     }
 
     //change the status of a user

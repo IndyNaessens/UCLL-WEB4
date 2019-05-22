@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()   //just for school, will always run local
                 .authorizeRequests()
-                .antMatchers("/images/**", "/js/**", "/login","/blog", "/register").permitAll()
+                .antMatchers("/images/**", "/js/**", "/login","/blog", "/register", "/api/user").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
